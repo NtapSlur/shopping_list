@@ -1,47 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Welcome, {{name}} from Class {{class}}!</a>
+          <form class="d-flex" role="search">
+            <a href="{% url 'main:logout' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Logout</a>
+          </form>
+        </div>
+      </nav>
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
-
-    <h5>Class:</h5>
-    <p>{{class}}</p>
-
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Date Added</th>
-    </tr>
-
-    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-    {% for product in products %}
+<table class="table">
+    <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
         <tr>
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
             <td>{{product.description}}</td>
             <td>{{product.date_added}}</td>
+            <td><a href="{% url 'main:edit_product' product.pk %}">
+            <button>
+                Edit
+            </button>
+            </a>
+            <a href="{% url 'main:delete_product' product.pk %}">
+                <button>
+                    Delete
+                </button>
+            </a>
+            </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
+    </tbody>
+
+    
 </table>
 
-<br />
 <h5>Sesi terakhir login: {{ last_login }}</h5>
+<br>
 <a href="{% url 'main:create_product' %}">
     <button>
         Add New Product
     </button>
 </a>
+<br>
+<br>
 
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
 
     
 {% endblock content %}
