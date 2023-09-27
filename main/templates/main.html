@@ -3,7 +3,7 @@
 {% block content %}
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand">Welcome, {{name}} from Class {{class}}!</a>
+          <a class="navbar-brand">Welcome, {{name}} from {{class}}!</a>
           <form class="d-flex" role="search">
             <a href="{% url 'main:logout' %}" class="btn btn-outline-success" tabindex="-1" role="button" aria-disabled="true">Logout</a>
           </form>
